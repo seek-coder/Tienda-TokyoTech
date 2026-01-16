@@ -1,0 +1,92 @@
+<%- include("partials/head.ejs") %>
+    <%- include("partials/nav.ejs") %>
+
+        <main>
+            <h1>Lista de productos</h1>
+            <!-- BUSCADOR -->
+            <div style="margin: 2rem 0;">
+                <input type="text" id="buscador" placeholder="Buscar por nombre, marca, modelo o categoría..."
+                    style="width: 100%; padding: 1rem; font-size: 1.1rem; border: 2px solid #565f89; border-radius: 8px; background-color: #24283b; color: #c0caf5;">
+                <p id="resultado-busqueda"
+                    style="margin-top: 1rem; color: #7aa2f7; font-weight: 600; background-color: #1a1b26; padding: 1rem; border-radius: 8px; border: 2px solid #565f89; display: none;">
+                </p>
+            </div>
+            <hr>
+            <div id="contenedor-productos">
+                <!-- itero el array de productos que le pasao desde el endpoint -->
+                <% productos.forEach(prod=> { %>
+                    <div class="card-producto" data-nombre="<%= (prod.Nombre || '').toLowerCase() %>"
+                        data-marca="<%= (prod.Marca || '').toLowerCase() %>"
+                        data-modelo="<%= (prod.Modelo || '').toLowerCase() %>"
+                        data-categoria="<%= (prod.Categoria || '').toLowerCase() %>">
+                        <div class="card-imagen">
+                            <img src="<%= prod.Imagen %>" alt="<%= prod.Nombre %>">
+                        </div>
+                        <div class="card-contenido">
+                            <div class="card-badges">
+                                <span class="badge badge-id-small">ID: <%= prod.id %></span>
+                                <span class="badge badge-categoria">
+                                    <%= prod.Categoria %>
+                                </span>
+                            </div>
+                            <h4 class="card-titulo">
+                                <%= prod.Nombre %>
+                            </h4>
+                            <p class="card-marca">
+                                <%= prod.Marca %> - <%= prod.Modelo %>
+                            </p>
+                            <div class="card-footer">
+                                <span class="card-precio">$<%= prod.Precio.toLocaleString('es-AR') %></span>
+                                <span class="card-stock <%= prod.Stock < 10 ? 'stock-bajo' : '' %>">
+                                    <%= prod.Stock %> unid.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+        </main>
+        <!-- SCRIPT DEL BUSCADOR -->
+        <script>
+            const buscador = document.getElementById('buscador');
+            const productos = document.querySelectorAll('.card-producto');
+            const resultadoTexto = document.getElementById('resultado-busqueda');
+            const totalProductos = productos.length;
+
+            buscador.addEventListener('input', function () {
+                const busqueda = this.value.toLowerCase().trim();
+                let productosVisibles = 0;
+
+                productos.forEach(producto => {
+                    const nombre = producto.getAttribute('data-nombre');
+                    const marca = producto.getAttribute('data-marca');
+                    const modelo = producto.getAttribute('data-modelo');
+                    const categoria = producto.getAttribute('data-categoria');
+
+                    if (nombre.includes(busqueda) ||
+                        marca.includes(busqueda) ||
+                        modelo.includes(busqueda) ||
+                        categoria.includes(busqueda)) {
+                        producto.style.display = 'flex';
+                        productosVisibles++;
+                    } else {
+                        producto.style.display = 'none';
+                    }
+                });
+
+                if (busqueda === '') {
+                    resultadoTexto.textContent = '';
+                    resultadoTexto.style.display = 'none'; // Ocultar cuando no hay búsqueda
+                } else if (productosVisibles === 0) {
+                    resultadoTexto.textContent = ' No se encontraron productos';
+                    resultadoTexto.style.color = '#bb9af7';
+                    resultadoTexto.style.display = 'block'; // Mostrar recuadro
+                } else {
+                    resultadoTexto.textContent = `✓ ${productosVisibles} de ${totalProductos} productos encontrados`;
+                    resultadoTexto.style.color = '#bb9af7';
+                    resultadoTexto.style.display = 'block';
+                }
+            });
+        </script>
+
+        <%- include("partials/footer.ejs") %>

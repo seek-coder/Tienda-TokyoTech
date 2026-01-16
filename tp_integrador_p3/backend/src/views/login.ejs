@@ -1,0 +1,170 @@
+<%- include("partials/head.ejs") %>
+
+    <style>
+        /*
+        ================================================================
+        Estilos específicos para el Login (Tokyo Night Theme)
+        ================================================================
+    */
+        body {
+            /* Mantenemos el fondo del tema Tokyo Night y centramos el contenido */
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* Usamos altura completa del viewport, pero sin limitar el width para ser responsive */
+            min-height: 100vh;
+            background-color: #c1c3dd;
+            /* Tokyo Night background */
+            margin: 1;
+            padding: 0;
+            background-image: url('/img/fondo_login.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            gap: 2rem;
+            /* Espacio entre el logo y el formulario */
+        }
+
+        .login-container {
+            background-color: #1f4596;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(224, 236, 236, 0.747);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-sizing: border-box;
+            /* Asegura que padding no afecte el ancho total */
+            opacity: 1;
+        }
+
+        /* Imagen (si existiera) */
+        .login-container img {
+            max-width: 250px;
+            border: 1px solid transparent;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+        }
+
+        .login-container h1,
+        .login-container h3 {
+            color: #c0caf5;
+            /* Texto principal claro */
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            text-align: center;
+            word-wrap: break-word;
+            /* Evita que las palabras se corten */
+            overflow-wrap: break-word;
+        }
+
+        /* Estilo para los inputs */
+        .login-container label {
+            display: block;
+            /* Mantiene el label en su propia línea */
+            text-align: left;
+            color: #7aa2f7;
+            /* Color de acento para labels */
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .login-container input[type="email"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 1rem;
+            border: 1px solid #414868;
+            border-radius: 5px;
+            background-color: #1a1b26;
+            color: #c0caf5;
+            box-sizing: border-box;
+        }
+
+        /* Estilo para los botones */
+        .btn-login {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #7aa2f7;
+            /* Azul/Celeste de Tokyo Night */
+            color: #a8aef3;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-sizing: border-box;
+            text-transform: uppercase;
+        }
+
+        .btn-login:hover {
+            background-color: #2ac3de;
+            /* Verde/Cian en hover */
+        }
+
+        /* Estilo para el botón de Acceso Rápido para distinguirlo un poco */
+        #acceso {
+            background-color: #414868;
+            /* Gris oscuro/neutral */
+            color: #c0caf5;
+        }
+
+        #acceso:hover {
+            background-color: #565f89;
+        }
+
+        /* Mensaje de Error */
+        .error-message {
+            color: #e20202;
+            /* Rojo/Rosa de error */
+            background-color: #24283b;
+            border: 1px solid #000000;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+    </style>
+
+    <div class="login-container">
+
+
+
+        <h2>Login administrador</h2>
+        <!--<h3 style="white-space: nowrap;">Administrador</h3>-->
+
+        <% if (typeof error !=="undefined" && error) { %>
+            <div class="error-message">
+                <%= error %>
+            </div>
+            <% } %>
+
+                <form id="login-form" action="/login" method="POST" autocomplete="off">
+
+                    <label for="correoUser">Correo</label>
+                    <input type="email" name="correo" id="correoUser" placeholder="ejemplo@correo.com">
+
+                    <label for="passwordUser">Password</label>
+                    <input type="password" name="password" id="passwordUser" placeholder="Contraseña">
+
+                    <input type="submit" class="btn-login" value="Ingresar">
+                    <input type="button" id="acceso" class="btn-login" value="Acceso rápido">
+                </form>
+    </div>
+
+    <script>
+        // Script de acceso rápido del segundo ejemplo
+        let emailUser = document.getElementById("correoUser");
+        let passwordUser = document.getElementById("passwordUser");
+
+        let acceso_rapido = document.getElementById("acceso");
+        acceso_rapido.addEventListener("click", () => {
+            emailUser.value = "admin@admin.com";
+            passwordUser.value = "admin123";
+        });
+    </script>
+
+    <%- include("partials/footer.ejs") %>

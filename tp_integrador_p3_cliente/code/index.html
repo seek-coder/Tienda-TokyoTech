@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda TokyoTech</title>
+
+    <!-- LÓGICA Y ESTILO -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/tokyo-night.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script defer src="./js/main.js"></script>
+</head>
+
+<body>
+    <!-- BOTÓN DE ADMINISTRADOR -->
+    <a href="http://localhost:3000/login" class="btn-admin">
+        Ingresar como Administrador
+        
+    </a>
+    <!-- BRAND IMAGE -->
+    <img class="brand" src="./img/brand/TokyoTech.png" alt="TokyoTech">
+
+    <!-- PANTALLA 1: BIENVENIDA -->
+    <section id="pantalla-bienvenida" class="pantalla">
+        <div class="welcome-container">
+            <h2>Bienvenido a TokyoTech</h2>
+            <p>Por favor, ingresa tu nombre para comenzar</p>
+            <input type="text" id="input-nombre-usuario" placeholder="Tu nombre...">
+            <button onclick="ingresarTienda()">Ingresar</button>
+        </div>
+    </section>
+
+    <!-- PANTALLA 2: PRODUCTOS -->
+    <section id="pantalla-productos" class="pantalla" style="display: none;">
+        <!-- HEADER / NAV -->
+        <header>
+            <div class="centro">
+                <div class="filtro">
+                    <input type="text" id="barra-busqueda" placeholder="Buscar...">
+                </div>
+            </div>
+            <div class="carrito-header" onclick="irAlCarrito()">
+                <p id="carritos-contador">🛒 Carrito: 0</p>
+            </div>
+        </header>
+
+        <div class="user-info-bar">
+            <p>Hola, <span id="nombre-usuario-display"></span>!</p>
+        </div>
+
+        <h1 class="prod-elect">Productos de electrónica</h1>
+        <div class="ordenar-productos">
+            <button onclick="ordenarPorNombre()">Ordenar por Nombre</button>
+            <button onclick="ordenarPorPrecio()">Ordenar por Precio</button>
+        </div>
+
+        <main>
+            <section id="contenedor-productos">
+                <!-- JS injects products here -->
+            </section>
+        </main>
+    </section>
+
+    <!-- PANTALLA 3: CARRITO -->
+    <section id="pantalla-carrito" class="pantalla" style="display: none;">
+        <h2>Tu Carrito</h2>
+        <button class="btn-volver" onclick="volverAProductos()">← Seguir comprando</button>
+
+        <div id="contenedor-items-carrito">
+            <!-- JS injects cart items here -->
+        </div>
+
+        <div class="carrito-actions">
+            <button id="vaciar-carrito" onclick="vaciarCarrito()">Vaciar carrito</button>
+            <button id="confirmar-compra" onclick="generarTicket()">Confirmar Compra</button>
+        </div>
+    </section>
+
+    <!-- PANTALLA 4: TICKET -->
+    <section id="pantalla-ticket" class="pantalla" style="display: none;">
+        <div class="ticket-container">
+            <h2>Ticket de Compra</h2>
+            <div id="contenido-ticket">
+                <!-- JS injects ticket details here -->
+            </div>
+            <button onclick="finalizarCompra()">Finalizar</button>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+    </footer>
+</body>
+
+</html>

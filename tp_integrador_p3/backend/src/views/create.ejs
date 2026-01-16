@@ -1,0 +1,71 @@
+<%- include("partials/head.ejs") %>
+    <%- include("partials/nav.ejs") %>
+
+        <main>
+            <h1>Crear producto</h1>
+            <hr>
+
+            <form id="altaProducts-form">
+
+                <label for="nameProd">Nombre del Producto:</label>
+                <input type="text" name="name" id="nameProd" required>
+
+                <label for="brandProd">Marca:</label>
+                <input type="text" name="brand" id="brandProd" required>
+
+                <label for="modelProd">Modelo:</label>
+                <input type="text" name="model" id="modelProd" required>
+
+                <label for="descriptionProd">Descripción / Especificaciones:</label>
+                <textarea name="description" id="descriptionProd" required></textarea>
+
+                <label for="categoryProd">Categoría:</label>
+                <select name="category" id="categoryProd" required>
+                    <option value="Componente">Componente</option>
+                    <option value="Periferico">Periférico</option>
+                </select>
+
+                <label for="priceProd">Precio:</label>
+                <input type="number" name="price" id="priceProd" required step="0.01">
+
+                <label for="stockProd">Stock Disponible:</label>
+                <input type="number" name="stock" id="stockProd" required>
+
+                <label for="imageProd">Url imagen:</label>
+                <input type="text" name="image" id="imageProd" required>
+
+                <br>
+                <input type="submit" value="Crear producto">
+            </form>
+
+            <div id="contenedor-productos"></div>
+
+            <!-- Modal para mensajes -->
+            <div id="messageModal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn">&times;</span>
+                    <p id="modal-message"></p>
+                </div>
+            </div>
+            <h1>Crear usuario</h1>
+            <hr>
+
+            <form id="altaUsers-container">
+
+                <!-- Formulario que va a enviar nuestros datos al endpoint /api/users-->
+                <label for="correoUser">Correo</label>
+                <input type="email" name="correo" id="correoUser" required>
+
+                <label for="passwordUser">Password</label>
+                <input type="password" name="password" id="passwordUser" required>
+
+                <input type="submit" value="Crear usuario">
+            </form>
+
+
+            <div id="contenedor-productos"></div>
+        </main>
+
+        <script src="js/create.js"></script>
+
+        <%- include("partials/footer.ejs") %>

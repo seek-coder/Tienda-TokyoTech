@@ -98,8 +98,8 @@ tp_p3/
 
 1. **Clonar el repositorio**
 ```bash
-git clone https://github.com/tu-usuario/gatto_coria_programacion3_tp_final.git
-cd gatto_coria_programacion3_tp_final/tp_integrador_p3
+git clone https://github.com/seek-coder/Tienda-TokyoTech.git
+cd https://github.com/seek-coder/Tienda-TokyoTech.git
 ```
 
 2. **Instalar dependencias**
